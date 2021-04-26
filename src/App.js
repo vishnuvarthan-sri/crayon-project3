@@ -11,7 +11,6 @@ import {
   Paper,
   Typography,
   IconButton,
-  Button,
   Divider,
   Menu,
   MenuItem,
@@ -362,7 +361,6 @@ if(source.droppableId !== destination.droppableId){
                               </div>
                             )}
                           </Draggable>
-                          <Button style={{backgroundColor:"pink",display:"flex",justifyContent:"flex-end",marginLeft:"auto",alignItems:"center",marginTop:250,marginRight:5}} variant="contained" endIcon={<ArrowForwardIcon/>}>Notify</Button>
                           </div>
                         ))
                         :
