@@ -31,8 +31,8 @@ import DragIndicatorIcon from "@material-ui/icons/DragIndicator";
 import InputAdornment from "@material-ui/core/InputAdornment";
 
 import SearchIcon from "@material-ui/icons/Search";
-import FlipToFrontIcon from '@material-ui/icons/FlipToFront';
-import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';
+import FlipToFrontIcon from "@material-ui/icons/FlipToFront";
+import CancelOutlinedIcon from "@material-ui/icons/CancelOutlined";
 const styles = (theme) => ({
   root: {
     display: "flex",
@@ -50,17 +50,16 @@ const styles = (theme) => ({
   list: {
     backgroundColor: theme.palette.background.paper,
     borderRadius: 8,
-    padding:15,
-    margin:10
+    padding: 15,
+    margin: 10,
   },
-  select:{
-    width:800,
-    height:400,
-    borderStyle:"dashed",
-    borderRadius:4,
-    margin:5,
-    backgroundColor: "#F3F6FF"
-
+  select: {
+    width: 800,
+    height: 400,
+    borderStyle: "dashed",
+    borderRadius: 4,
+    margin: 5,
+    backgroundColor: "#F3F6FF",
   },
   list1: {
     display: "flex",
@@ -73,27 +72,27 @@ const styles = (theme) => ({
     background: "blue",
   },
   root1: {
-    paddingTop:theme.spacing(20),
-    padding:20
+    paddingTop: theme.spacing(20),
+    padding: 20,
   },
-  noCopy:{
-    display:"flex",
-    alignContent:'center',
-    justifyContent:"center",
-    marginLeft:theme.spacing(5),
-    marginTop:theme.spacing(20)
+  noCopy: {
+    display: "flex",
+    alignContent: "center",
+    justifyContent: "center",
+    marginLeft: theme.spacing(5),
+    marginTop: theme.spacing(20),
   },
-  card:{
-    background:"green",
-    color:"white",
-    fontSize:20,
-    padding:10,
-    margin:10,
-    borderRadius:6,
-    display:"flex",
-    alignItems:"center",
-    justifyContent:"flex-start"
-  }
+  card: {
+    background: "green",
+    color: "white",
+    fontSize: 20,
+    padding: 10,
+    margin: 10,
+    borderRadius: 6,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "flex-start",
+  },
 });
 
 const move = (source, destination, droppableSource, droppableDestination) => {
@@ -144,7 +143,7 @@ class App extends React.Component {
       value: 0,
       anchorEl: null,
       list: ITEMS,
-      selectItem:{},
+      selectItem: {},
     };
   }
   id2List = {
@@ -175,34 +174,33 @@ class App extends React.Component {
     if (!destination) {
       return;
     }
-if(source.droppableId !== destination.droppableId){
-    const results = move(
-      this.getList(source.droppableId),
-      this.getList(destination.droppableId),
-      source,
-      destination
-    );
-
-    this.setState({
-      selectItem: results.droppable2,
-    });
-  }
+    if (source.droppableId !== destination.droppableId) {
+      const results = move(
+        this.getList(source.droppableId),
+        this.getList(destination.droppableId),
+        source,
+        destination
+      );
+      this.setState({
+        selectItem: results.droppable2,
+      });
+      
+    }
   };
 
-  updatelist = () => {
-    this.setState({
-      list: ITEMS,
-    });
-  };
-  cardlist=()=>{
-    this.setState({
-      list:ITEMS,
-      selectItem:{}
+  cardlist = () => {
+    let old = this.state.list;
+    old.forEach((items)=>{
+      items.id = uuidv4()
     })
-  }
+    this.setState({
+      old,
+      selectItem: {},
+    });
+  };
   render() {
     const { classes } = this.props;
-
+    console.log(this.state.list,"the list")
     console.log(this.state.selectItem, "the selected item");
     return (
       <div className={classes.root}>
@@ -273,7 +271,7 @@ if(source.droppableId !== destination.droppableId){
           <DragDropContext onDragEnd={this.onDragEnd}>
             <Grid container spacing={1} direction="row">
               <Grid item xs={12} lg className={classes.list}>
-                <div >
+                <div>
                   <Typography variant="h6">Diseases</Typography>
                   <TextField
                     variant="outlined"
@@ -287,7 +285,7 @@ if(source.droppableId !== destination.droppableId){
                     }}
                   ></TextField>
 
-                  <Droppable droppableId="droppable">
+                  <Droppable droppableId="droppable" isDropDisabled={true}>
                     {(provided, snapshot) => (
                       <List
                         ref={provided.innerRef}
@@ -327,7 +325,7 @@ if(source.droppableId !== destination.droppableId){
               </Grid>
 
               <Grid item xs={12} lg className={classes.list}>
-                <div >
+                <div>
                   <Droppable droppableId="droppable2">
                     {(provided, snapshot) => (
                       <div
@@ -335,38 +333,42 @@ if(source.droppableId !== destination.droppableId){
                         isDraggingOver={snapshot.isDraggingOver}
                         className={classes.select}
                       >
-                        {this.state.selectItem.length ?
-                        
-                        this.state.selectItem.map((item, index) => (
-                          <div>
-                          <Draggable
-                            key={item.id}
-                            draggableId={item.id}
-                            index={index}
-                          >
-                            {(provided, snapshot) => (
-                              <div
-                                ref={provided.innerRef}
-                                {...provided.draggableProps}
-                                {...provided.dragHandleProps}
-                                className={classes.card}
-                              >
-                                {item.content}
-                                <CancelOutlinedIcon style={{display:"flex",
-        justifyContent: "flex-end", 
-        marginLeft: "auto",
-        alignItems:"center",}} onClick={this.cardlist}/>
-                              </div>
-                            )}
-                          </Draggable>
-                          </div>
-                        ))
-                        :
+                        {this.state.selectItem.length ? (
+                          this.state.selectItem.map((item, index) => (
+                            <Draggable
+                              key={item.id}
+                              draggableId={item.id}
+                              index={index}
+                            >
+                              {(provided, snapshot) => (
+                                <div
+                                  ref={provided.innerRef}
+                                  {...provided.draggableProps}
+                                  {...provided.dragHandleProps}
+                                  className={classes.card}
+                                >
+                                  {item.content}
+                                  <CancelOutlinedIcon
+                                    style={{
+                                      display: "flex",
+                                      justifyContent: "flex-end",
+                                      marginLeft: "auto",
+                                      alignItems: "center",
+                                    }}
+                                    onClick={this.cardlist}
+                                  />
+                                </div>
+                              )}
+                            </Draggable>
+                          ))
+                        ) : (
                           <div className={classes.noCopy}>
-                         <FlipToFrontIcon fontSize="large"/>
-                         <Typography variant="h5">Drag your Context Here</Typography>
+                            <FlipToFrontIcon fontSize="large" />
+                            <Typography variant="h5">
+                              Drag your Context Here
+                            </Typography>
                           </div>
-                        }
+                        )}
                         {provided.placeholder}
                       </div>
                     )}
