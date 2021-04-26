@@ -33,7 +33,6 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
 import FlipToFrontIcon from '@material-ui/icons/FlipToFront';
 import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';
-import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 const styles = (theme) => ({
   root: {
     display: "flex",
@@ -185,7 +184,6 @@ if(source.droppableId !== destination.droppableId){
     );
 
     this.setState({
-      list:results.droppable,
       selectItem: results.droppable2,
     });
   }
