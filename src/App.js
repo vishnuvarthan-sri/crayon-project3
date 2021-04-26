@@ -19,6 +19,7 @@ import {
   ListItem,
   ListItemSecondaryAction,
   TextField,
+  Button
 } from "@material-ui/core";
 import { AccountCircle } from "@material-ui/icons";
 import NotificationsNoneRoundedIcon from "@material-ui/icons/NotificationsNoneRounded";
@@ -33,6 +34,7 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
 import FlipToFrontIcon from "@material-ui/icons/FlipToFront";
 import CancelOutlinedIcon from "@material-ui/icons/CancelOutlined";
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 const styles = (theme) => ({
   root: {
     display: "flex",
@@ -143,7 +145,7 @@ class App extends React.Component {
       value: 0,
       anchorEl: null,
       list: ITEMS,
-      selectItem: {},
+      selectItem: [],
     };
   }
   id2List = {
@@ -195,13 +197,20 @@ class App extends React.Component {
     })
     this.setState({
       old,
-      selectItem: {},
+      selectItem: [],
     });
   };
   render() {
     const { classes } = this.props;
     console.log(this.state.list,"the list")
     console.log(this.state.selectItem, "the selected item");
+  // let item =""
+  //   if(this.state.selectItem !== undefined){
+  //    let selected = this.state.selectItem;
+  //     selected.forEach((select)=>{
+  //       item = select.content
+  //     })
+  //   }
     return (
       <div className={classes.root}>
         <CssBaseline />
@@ -333,7 +342,7 @@ class App extends React.Component {
                         isDraggingOver={snapshot.isDraggingOver}
                         className={classes.select}
                       >
-                        {this.state.selectItem.length ? (
+                        {/* {this.state.selectItem.length ? (
                           this.state.selectItem.map((item, index) => (
                             <Draggable
                               key={item.id}
@@ -362,6 +371,37 @@ class App extends React.Component {
                             </Draggable>
                           ))
                         ) : (
+                          <div className={classes.noCopy}>
+                            <FlipToFrontIcon fontSize="large" />
+                            <Typography variant="h5">
+                              Drag your Context Here
+                            </Typography>
+                          </div>
+                        )}
+                        {provided.placeholder} */}
+                        {this.state.selectItem.length ? 
+                        <div>
+                         {this.state.selectItem.map((item, index) => (
+                                <div
+                                  className={classes.card}
+                                >
+                                  {item.content}
+                                  <CancelOutlinedIcon
+                                    style={{
+                                      display: "flex",
+                                      justifyContent: "flex-end",
+                                      marginLeft: "auto",
+                                      alignItems: "center",
+                                    }}
+                                    onClick={this.cardlist}
+                                  />
+                                </div>
+                          ))}
+                          <div style={{display:"flex",justifyContent:"flex-end",alignItems:"center",marginLeft:"auto",marginTop:220,padding:10}}>
+                            <Button color="primary" endIcon={<ArrowForwardIcon />} style={{backgroundColor:"pink"}}>Notify</Button>
+                          </div>
+                          </div>
+                        : (
                           <div className={classes.noCopy}>
                             <FlipToFrontIcon fontSize="large" />
                             <Typography variant="h5">
