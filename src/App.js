@@ -15,7 +15,6 @@ import {
   Divider,
   Menu,
   MenuItem,
-  Container,
   List,
   ListItemText,
   ListItem,
@@ -23,7 +22,6 @@ import {
   TextField,
 } from "@material-ui/core";
 import { AccountCircle } from "@material-ui/icons";
-import MenuIcon from "@material-ui/icons/Menu";
 import NotificationsNoneRoundedIcon from "@material-ui/icons/NotificationsNoneRounded";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 
@@ -35,7 +33,8 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 
 import SearchIcon from "@material-ui/icons/Search";
 import FlipToFrontIcon from '@material-ui/icons/FlipToFront';
-
+import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 const styles = (theme) => ({
   root: {
     display: "flex",
@@ -51,25 +50,19 @@ const styles = (theme) => ({
     flexGrow: 1,
   },
   list: {
-    width: 350,
     backgroundColor: theme.palette.background.paper,
     borderRadius: 8,
-    padding: 10,
+    padding:15,
+    margin:10
   },
   select:{
-    width:780,
+    width:800,
     height:400,
     borderStyle:"dashed",
     borderRadius:4,
-    padding:5
+    margin:5,
+    backgroundColor: "#F3F6FF"
 
-  },
-  list2: {
-    width: 800,
-    height:420,
-    backgroundColor: theme.palette.background.paper,
-    borderRadius: 8,
-    padding: 10,
   },
   list1: {
     display: "flex",
@@ -82,8 +75,8 @@ const styles = (theme) => ({
     background: "blue",
   },
   root1: {
-    marginTop: theme.spacing(20),
-    padding: 30,
+    paddingTop:theme.spacing(20),
+    padding:20
   },
   noCopy:{
     display:"flex",
@@ -91,6 +84,17 @@ const styles = (theme) => ({
     justifyContent:"center",
     marginLeft:theme.spacing(5),
     marginTop:theme.spacing(20)
+  },
+  card:{
+    background:"green",
+    color:"white",
+    fontSize:20,
+    padding:10,
+    margin:10,
+    borderRadius:6,
+    display:"flex",
+    alignItems:"center",
+    justifyContent:"flex-start"
   }
 });
 
@@ -142,7 +146,7 @@ class App extends React.Component {
       value: 0,
       anchorEl: null,
       list: ITEMS,
-      selectItem: [],
+      selectItem:{},
     };
   }
   id2List = {
@@ -193,6 +197,12 @@ if(source.droppableId !== destination.droppableId){
       list: ITEMS,
     });
   };
+  cardlist=()=>{
+    this.setState({
+      list:ITEMS,
+      selectItem:{}
+    })
+  }
   render() {
     const { classes } = this.props;
 
@@ -251,26 +261,26 @@ if(source.droppableId !== destination.droppableId){
               scrollButtons="auto"
             >
               <Tab label="Notify" />
-              <Tab label="Disabled" />
-              <Tab label="Active" />
-              <Tab label="Active" />
-              <Tab label="Disabled" />
-              <Tab label="Active" />
-              <Tab label="Disabled" />
-              <Tab label="Active" />
-              <Tab label="Niggaa" />
+              <Tab label="Dashboard" />
+              <Tab label="Disease master" />
+              <Tab label="Forms" />
+              <Tab label="Country master" />
+              <Tab label="Roles" />
+              <Tab label="Users" />
+              <Tab label="Notification" />
+              <Tab label="verification" />
             </Tabs>
           </Paper>
         </AppBar>
         <div className={classes.root1}>
           <DragDropContext onDragEnd={this.onDragEnd}>
-            <Grid container spacing={3} direction="row">
-              <Grid item >
-                <div className={classes.list}>
+            <Grid container spacing={1} direction="row">
+              <Grid item xs={12} lg className={classes.list}>
+                <div >
                   <Typography variant="h6">Diseases</Typography>
                   <TextField
                     variant="outlined"
-                    style={{ width: 320 }}
+                    style={{ width: 350 }}
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
@@ -319,8 +329,8 @@ if(source.droppableId !== destination.droppableId){
                 </div>
               </Grid>
 
-              <Grid item >
-                <div className={classes.list2}>
+              <Grid item xs={12} lg className={classes.list}>
+                <div >
                   <Droppable droppableId="droppable2">
                     {(provided, snapshot) => (
                       <div
@@ -331,6 +341,7 @@ if(source.droppableId !== destination.droppableId){
                         {this.state.selectItem.length ?
                         
                         this.state.selectItem.map((item, index) => (
+                          <div>
                           <Draggable
                             key={item.id}
                             draggableId={item.id}
@@ -341,14 +352,19 @@ if(source.droppableId !== destination.droppableId){
                                 ref={provided.innerRef}
                                 {...provided.draggableProps}
                                 {...provided.dragHandleProps}
-                              
+                                className={classes.card}
                               >
                                 {item.content}
+                                <CancelOutlinedIcon style={{display:"flex",
+        justifyContent: "flex-end", 
+        marginLeft: "auto",
+        alignItems:"center",}} onClick={this.cardlist}/>
                               </div>
                             )}
                           </Draggable>
+                          <Button style={{backgroundColor:"pink",display:"flex",justifyContent:"flex-end",marginLeft:"auto",alignItems:"center",marginTop:250,marginRight:5}} variant="contained" endIcon={<ArrowForwardIcon/>}>Notify</Button>
+                          </div>
                         ))
-                        
                         :
                           <div className={classes.noCopy}>
                          <FlipToFrontIcon fontSize="large"/>
