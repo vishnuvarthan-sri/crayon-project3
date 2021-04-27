@@ -75,10 +75,7 @@ const styles = (theme) => ({
   },
   root1: {
     paddingTop: theme.spacing(20),
-    display:"flex",
-    alignItems:"center",
-    justifyContent:"center",
-    margin:"auto"
+   padding:40
   },
   noCopy: {
     display: "flex",
@@ -281,7 +278,7 @@ class App extends React.Component {
         <div className={classes.root1}>
           <DragDropContext onDragEnd={this.onDragEnd}>
             <Grid container spacing={1} direction="row">
-              <Grid item xs={12} lg className={classes.list}>
+              <Grid item xs={12} lg={4} >
                 <div>
                   <Typography variant="h6">Diseases</Typography>
                   <TextField
@@ -335,7 +332,7 @@ class App extends React.Component {
                 </div>
               </Grid>
 
-              <Grid item xs={12} lg className={classes.list}>
+              <Grid item xs={12} lg={8}>
                 <div>
                   <Droppable droppableId="droppable2">
                     {(provided, snapshot) => (
