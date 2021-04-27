@@ -100,14 +100,13 @@ const styles = (theme) => ({
 const move = (source, destination, droppableSource, droppableDestination) => {
   const sourceClone = Array.from(source);
   const destClone = Array.from(destination);
-  const [removed] = sourceClone.splice(droppableSource.index, 1);
-
+  const [removed] = sourceClone.splice(droppableSource.index, 1); 
   destClone.splice(droppableDestination.index, 0, removed);
-
+  const dest  = removed.content
   const result = {};
   result[droppableSource.droppableId] = sourceClone;
-  result[droppableDestination.droppableId] = destClone;
-
+  result[droppableDestination.droppableId] = dest;
+  console.log(result,"result")
   return result;
 };
 
@@ -145,7 +144,7 @@ class App extends React.Component {
       value: 0,
       anchorEl: null,
       list: ITEMS,
-      selectItem: [],
+      selectItem: "",
     };
   }
   id2List = {
@@ -197,7 +196,7 @@ class App extends React.Component {
     })
     this.setState({
       old,
-      selectItem: [],
+      selectItem: "",
     });
   };
   render() {
@@ -381,11 +380,11 @@ class App extends React.Component {
                         {provided.placeholder} */}
                         {this.state.selectItem.length ? 
                         <div>
-                         {this.state.selectItem.map((item, index) => (
+                         
                                 <div
                                   className={classes.card}
                                 >
-                                  {item.content}
+                                  {this.state.selectItem}
                                   <CancelOutlinedIcon
                                     style={{
                                       display: "flex",
@@ -396,7 +395,7 @@ class App extends React.Component {
                                     onClick={this.cardlist}
                                   />
                                 </div>
-                          ))}
+                        
                           <div style={{display:"flex",justifyContent:"flex-end",alignItems:"center",marginLeft:"auto",marginTop:220,padding:10}}>
                             <Button color="primary" endIcon={<ArrowForwardIcon />} style={{backgroundColor:"pink"}}>Notify</Button>
                           </div>
