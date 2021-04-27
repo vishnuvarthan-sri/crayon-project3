@@ -19,7 +19,7 @@ import {
   ListItem,
   ListItemSecondaryAction,
   TextField,
-  Button
+  Button,
 } from "@material-ui/core";
 import { AccountCircle } from "@material-ui/icons";
 import NotificationsNoneRoundedIcon from "@material-ui/icons/NotificationsNoneRounded";
@@ -34,7 +34,7 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
 import FlipToFrontIcon from "@material-ui/icons/FlipToFront";
 import CancelOutlinedIcon from "@material-ui/icons/CancelOutlined";
-import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 const styles = (theme) => ({
   root: {
     display: "flex",
@@ -49,64 +49,81 @@ const styles = (theme) => ({
   title: {
     flexGrow: 1,
   },
-  list: {
-    backgroundColor: theme.palette.background.paper,
-    borderRadius: 8,
-    padding: 15,
-    margin: 10,
-  },
-  select: {
-    width: 820,
-    height: 400,
-    borderStyle: "dashed",
-    borderRadius: 4,
-    margin: 5,
-    backgroundColor: "#F3F6FF",
-  },
-  list1: {
-    display: "flex",
-    userSelect: "none",
-    padding: theme.spacing(2),
-    margin: "0 0  0.5 0",
-    alignItems: "flex-start",
-    alignContent: "flex-start",
-    borderRadius: 14,
-    background: "blue",
-  },
-  root1: {
-    paddingTop: theme.spacing(20),
-   padding:40
-  },
   noCopy: {
     display: "flex",
-    alignContent: "center",
+    alignItems: "center",
     justifyContent: "center",
-    marginLeft: theme.spacing(5),
-    marginTop: theme.spacing(20),
   },
-  card: {
-    background: "green",
-    color: "white",
-    fontSize: 20,
-    padding: 10,
-    margin: 10,
-    borderRadius: 6,
+  icon2:{
     display: "flex",
     alignItems: "center",
-    justifyContent: "flex-start",
+    justifyContent: "flex-end",
+    marginTop:theme.spacing(23)
   },
+  plaque:{
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop:theme.spacing(10),
+    flexDirection:"column"
+  },
+  list: {
+    border: "1px solid #0000001A",
+    height: "100%",
+    background: "#FFFFFF 0% 0% no-repeat padding-box",
+    overflowX: "hidden",
+    borderRadius: "10px",
+    padding: 5,
+  },
+  select: {
+    border: "2px dashed #110F474D",
+    height: "100%",
+    padding: "16px",
+    background: "#110F4708 0% 0% no-repeat padding-box",
+    borderRadius: "7px",
+    width: 900,
+  },
+  list1: {
+    border: "1px solid #0000001A",
+    height: "100%",
+    background: "#FFFFFF 0% 0% no-repeat padding-box",
+    overflowx: "hidden",
+    borderRadius: "10px",
+  },
+  root1: {
+    marginTop: theme.spacing(20),
+    padding: "27px",
+  },
+  card: {
+    border: "1px solid #110F471A",
+    padding: "16px",
+    background: "#23A9A6 0% 0% no-repeat padding-box",
+    boxShadow: "0px 15px 25px #110f470f",
+    borderRadius: "7px",
+  },
+  icon:{
+    width: "100px",
+    border: '1px solid #110F471A',
+    height: '100px',
+    display: 'flex',
+    background: "#FFFFFF 0% 0% no-repeat padding-box",
+    alignItems: "center",
+    borderRadius: "50%",
+    marginBottom: "10px",
+    justifyContent: "center",
+  }
 });
 
 const move = (source, destination, droppableSource, droppableDestination) => {
   const sourceClone = Array.from(source);
   const destClone = Array.from(destination);
-  const [removed] = sourceClone.splice(droppableSource.index, 1); 
+  const [removed] = sourceClone.splice(droppableSource.index, 1);
   destClone.splice(droppableDestination.index, 0, removed);
-  const dest  = removed.content
+  const dest = removed.content;
   const result = {};
   result[droppableSource.droppableId] = sourceClone;
   result[droppableDestination.droppableId] = dest;
-  console.log(result,"result")
+  console.log(result, "result");
   return result;
 };
 
@@ -185,15 +202,14 @@ class App extends React.Component {
       this.setState({
         selectItem: results.droppable2,
       });
-      
     }
   };
 
   cardlist = () => {
     let old = this.state.list;
-    old.forEach((items)=>{
-      items.id = uuidv4()
-    })
+    old.forEach((items) => {
+      items.id = uuidv4();
+    });
     this.setState({
       old,
       selectItem: "",
@@ -201,15 +217,15 @@ class App extends React.Component {
   };
   render() {
     const { classes } = this.props;
-    console.log(this.state.list,"the list")
+    console.log(this.state.list, "the list");
     console.log(this.state.selectItem, "the selected item");
-  // let item =""
-  //   if(this.state.selectItem !== undefined){
-  //    let selected = this.state.selectItem;
-  //     selected.forEach((select)=>{
-  //       item = select.content
-  //     })
-  //   }
+    // let item =""
+    //   if(this.state.selectItem !== undefined){
+    //    let selected = this.state.selectItem;
+    //     selected.forEach((select)=>{
+    //       item = select.content
+    //     })
+    //   }
     return (
       <div className={classes.root}>
         <CssBaseline />
@@ -253,37 +269,51 @@ class App extends React.Component {
               <MenuItem onClick={this.handleClose}>Logout</MenuItem>
             </Menu>
           </Toolbar>
-          <Paper square>
-            <Tabs
-              indicatorColor="primary"
-              textColor="primary"
-              aria-label="disabled tabs example"
-              value={this.state.value}
-              onChange={this.handlechange}
-              variant="scrollable"
-              scrollButtons="auto"
-            >
-              <Tab label="Notify" />
-              <Tab label="Dashboard" />
-              <Tab label="Disease master" />
-              <Tab label="Forms" />
-              <Tab label="Country master" />
-              <Tab label="Roles" />
-              <Tab label="Users" />
-              <Tab label="Notification" />
-              <Tab label="verification" />
-            </Tabs>
-          </Paper>
+          <AppBar position="relative">
+            <Paper square>
+              <Tabs
+                indicatorColor="primary"
+                textColor="primary"
+                aria-label="disabled tabs example"
+                value={this.state.value}
+                onChange={this.handlechange}
+                variant="scrollable"
+                scrollButtons="auto"
+              >
+                <Tab label="Notify" />
+                <Tab label="Dashboard" />
+                <Tab label="Disease master" />
+                <Tab label="Forms" />
+                <Tab label="Country master" />
+                <Tab label="Roles" />
+                <Tab label="Users" />
+                <Tab label="Notification" />
+                <Tab label="verification" />
+              </Tabs>
+            </Paper>
+          </AppBar>
         </AppBar>
+
         <div className={classes.root1}>
           <DragDropContext onDragEnd={this.onDragEnd}>
-            <Grid container spacing={1} direction="row">
-              <Grid item xs={12} lg={4} >
-                <div>
+            <Grid
+              container
+              spacing={2}
+              direction="row"
+            
+            >
+              <Grid
+                item
+                xs={12}
+                sm={12}
+                md
+                lg
+              
+              >
+                <div className={classes.list}>
                   <Typography variant="h6">Diseases</Typography>
                   <TextField
                     variant="outlined"
-                    style={{ width: 350 }}
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
@@ -331,75 +361,88 @@ class App extends React.Component {
                   </Droppable>
                 </div>
               </Grid>
+              <Grid
+                item
+                xs={12}
+                sm={12}
+                md
+                lg
+                
+              >
+                <div className={classes.list1}>
+                  <div style={{ padding: "16px", height: "100%" }}>
+                    <Droppable droppableId="droppable2">
+                      {(provided, snapshot) => (
+                        <div
+                          ref={provided.innerRef}
+                          isDraggingOver={snapshot.isDraggingOver}
+                          className={classes.select}
+                        >
+                          {this.state.selectItem.length ? (
+                            <div>
+                            <div className={classes.card}>
+                              <Grid
+                                container
+                                direction="row"
+                                alignItems="center"
+                                justify="space-between"
+                              >
+                                <Grid item>{this.state.selectItem}</Grid>
+                                <Grid item >
+                                  <CancelOutlinedIcon onClick={this.cardlist}/>
+                                </Grid>
+                              </Grid>
+                            </div>
+                            <div className={classes.icon2}>
+                             <Button color="primary" style={{backgroundColor:"pink"}}  endIcon={<ArrowForwardIcon/>}>Notify</Button>
+                            </div>
+                            </div>
+                          ) : (
+                            <div className={classes.plaque}>
+                                  <div className={classes.icon}>
+                                  <FlipToFrontIcon fontSize="large" />
+                                  </div>
+      
+                                  <Typography variant="h5">
+                                    {" "}
+                                    Please drag and drop a Disease
+                                  </Typography>
+                               
+    
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </Droppable>
+                  </div>
+                </div>
+              </Grid>
 
-              <Grid item xs={12} lg={8}>
-                <div>
-                  <Droppable droppableId="droppable2">
+              {/* <Grid item xs={12} sm={12} md lg >
+                <div className={classes.list1}>
+                  <div style={{padding:"16px",height:"100%",flexGrow:1}}>
+                  <Droppable droppableId="droppable2" >
                     {(provided, snapshot) => (
                       <div
                         ref={provided.innerRef}
                         isDraggingOver={snapshot.isDraggingOver}
                         className={classes.select}
                       >
-                        {/* {this.state.selectItem.length ? (
-                          this.state.selectItem.map((item, index) => (
-                            <Draggable
-                              key={item.id}
-                              draggableId={item.id}
-                              index={index}
-                            >
-                              {(provided, snapshot) => (
-                                <div
-                                  ref={provided.innerRef}
-                                  {...provided.draggableProps}
-                                  {...provided.dragHandleProps}
-                                  className={classes.card}
-                                >
-                                  {item.content}
-                                  <CancelOutlinedIcon
-                                    style={{
-                                      display: "flex",
-                                      justifyContent: "flex-end",
-                                      marginLeft: "auto",
-                                      alignItems: "center",
-                                    }}
-                                    onClick={this.cardlist}
-                                  />
-                                </div>
-                              )}
-                            </Draggable>
-                          ))
-                        ) : (
-                          <div className={classes.noCopy}>
-                            <FlipToFrontIcon fontSize="large" />
-                            <Typography variant="h5">
-                              Drag your Context Here
-                            </Typography>
-                          </div>
-                        )}
-                        {provided.placeholder} */}
                         {this.state.selectItem.length ? 
-                        <div>
-                         
-                                <div
-                                  className={classes.card}
-                                >
+                             <div style={{display:"flex",height:"100%"}}>
+                                <div className={classes.card} >
+                                  <Grid container direction="row" justify="space-between" alignItems="center">
+                                    <Grid item>
                                   {this.state.selectItem}
+                                  </Grid>
+                                  <Grid item>
                                   <CancelOutlinedIcon
-                                    style={{
-                                      display: "flex",
-                                      justifyContent: "flex-end",
-                                      marginLeft: "auto",
-                                      alignItems: "center",
-                                    }}
                                     onClick={this.cardlist}
                                   />
+                                  </Grid>
+                                  </Grid>
                                 </div>
-                        
-                          <div style={{display:"flex",justifyContent:"flex-end",alignItems:"center",marginLeft:"auto",marginTop:220,padding:10}}>
-                            <Button color="primary" endIcon={<ArrowForwardIcon />} style={{backgroundColor:"pink"}}>Notify</Button>
-                          </div>
-                          </div>
+                              </div>
                         : (
                           <div className={classes.noCopy}>
                             <FlipToFrontIcon fontSize="large" />
@@ -412,8 +455,9 @@ class App extends React.Component {
                       </div>
                     )}
                   </Droppable>
-                </div>
-              </Grid>
+                  </div>
+                  </div>
+              </Grid> */}
             </Grid>
           </DragDropContext>
         </div>
