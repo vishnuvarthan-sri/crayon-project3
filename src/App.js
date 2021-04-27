@@ -94,6 +94,9 @@ const styles = (theme) => ({
     marginTop: theme.spacing(20),
     padding: "27px",
   },
+  mainroot:{
+   width:"100%"
+  },
   card: {
     border: "1px solid #110F471A",
     padding: "16px",
@@ -293,8 +296,9 @@ class App extends React.Component {
             </Paper>
           </AppBar>
         </AppBar>
-
+       
         <div className={classes.root1}>
+          <div className={classes.mainroot}>
           <DragDropContext onDragEnd={this.onDragEnd}>
             <Grid
               container
@@ -365,7 +369,7 @@ class App extends React.Component {
                 item
                 xs={12}
                 sm={12}
-                md
+                
                 lg
                 
               >
@@ -460,6 +464,7 @@ class App extends React.Component {
               </Grid> */}
             </Grid>
           </DragDropContext>
+          </div>
         </div>
       </div>
     );
