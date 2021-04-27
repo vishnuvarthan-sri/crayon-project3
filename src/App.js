@@ -75,7 +75,7 @@ const styles = (theme) => ({
   },
   root1: {
     paddingTop: theme.spacing(20),
-    padding: 26,
+    padding: 24,
   },
   noCopy: {
     display: "flex",
