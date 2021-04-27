@@ -56,7 +56,7 @@ const styles = (theme) => ({
     margin: 10,
   },
   select: {
-    width: 840,
+    width: 820,
     height: 400,
     borderStyle: "dashed",
     borderRadius: 4,
@@ -75,7 +75,7 @@ const styles = (theme) => ({
   },
   root1: {
     paddingTop: theme.spacing(20),
-    padding: 20,
+    padding: 24,
   },
   noCopy: {
     display: "flex",
