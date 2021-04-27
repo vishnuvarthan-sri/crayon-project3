@@ -56,7 +56,7 @@ const styles = (theme) => ({
     margin: 10,
   },
   select: {
-    width: 800,
+    width: 840,
     height: 400,
     borderStyle: "dashed",
     borderRadius: 4,
