@@ -70,6 +70,7 @@ const styles = (theme) => ({
   list: {
     border: "1px solid #0000001A",
     height: "100%",
+    widthL:"100%",
     background: "#FFFFFF 0% 0% no-repeat padding-box",
     overflowX: "hidden",
     borderRadius: "10px",
@@ -86,14 +87,14 @@ const styles = (theme) => ({
   list1: {
     border: "1px solid #0000001A",
     height: "100%",
+    width:"100%",
     background: "#FFFFFF 0% 0% no-repeat padding-box",
     overflowx: "hidden",
     borderRadius: "10px",
   },
   root1: {
     marginTop: theme.spacing(20),
-    padding: "27px",
-
+    padding:12
   },
 
   card: {
@@ -237,10 +238,10 @@ class App extends React.Component {
     //     })
     //   }
     return (
-      <div className={classes.root}>
+      <div className={classes.root} >
         <CssBaseline />
 
-        <AppBar position="absolute">
+        <AppBar position="fixed">
           <Toolbar variant="dense">
             <IconButton
               edge="start"
