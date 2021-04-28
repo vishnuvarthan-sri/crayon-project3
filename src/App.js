@@ -58,13 +58,13 @@ const styles = (theme) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "flex-end",
-    marginTop:theme.spacing(23)
+    marginTop:theme.spacing(30)
   },
   plaque:{
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    marginTop:theme.spacing(10),
+    marginTop:theme.spacing(20),
     flexDirection:"column"
   },
   list: {
@@ -81,7 +81,7 @@ const styles = (theme) => ({
     padding: "16px",
     background: "#110F4708 0% 0% no-repeat padding-box",
     borderRadius: "7px",
-    width: 900,
+    
   },
   list1: {
     border: "1px solid #0000001A",
@@ -93,10 +93,9 @@ const styles = (theme) => ({
   root1: {
     marginTop: theme.spacing(20),
     padding: "27px",
+
   },
-  mainroot:{
-   width:"100%"
-  },
+
   card: {
     border: "1px solid #110F471A",
     padding: "16px",
@@ -155,6 +154,14 @@ const ITEMS = [
     id: uuidv4(),
     content: "Typoid",
   },
+  {
+    id:uuidv4(),
+    content:"HIV/Aids"
+  },
+  {
+    id:uuidv4(),
+    content:"Cancer"
+  }
 ];
 
 class App extends React.Component {
@@ -296,9 +303,8 @@ class App extends React.Component {
             </Paper>
           </AppBar>
         </AppBar>
-       
-        <div className={classes.root1}>
-          <div className={classes.mainroot}>
+       <div style={{width:"100%"}}>
+        <div className={classes.root1}> 
           <DragDropContext onDragEnd={this.onDragEnd}>
             <Grid
               container
@@ -310,14 +316,15 @@ class App extends React.Component {
                 item
                 xs={12}
                 sm={12}
-                md
-                lg
+                md={3}
+                lg={3}
               
               >
                 <div className={classes.list}>
                   <Typography variant="h6">Diseases</Typography>
                   <TextField
                     variant="outlined"
+                    fullWidth
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
@@ -369,8 +376,8 @@ class App extends React.Component {
                 item
                 xs={12}
                 sm={12}
-                
-                lg
+                md={9}
+                lg={9}
                 
               >
                 <div className={classes.list1}>
@@ -465,7 +472,7 @@ class App extends React.Component {
             </Grid>
           </DragDropContext>
           </div>
-        </div>
+          </div>
       </div>
     );
   }
