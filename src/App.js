@@ -74,7 +74,6 @@ const styles = (theme) => ({
     background: "#FFFFFF 0% 0% no-repeat padding-box",
     overflowX: "hidden",
     borderRadius: "10px",
-    padding: 5,
   },
   select: {
     border: "2px dashed #110F474D",
@@ -322,6 +321,7 @@ class App extends React.Component {
               
               >
                 <div className={classes.list}>
+                  <div style={{margin:7}}>
                   <Typography variant="h6">Diseases</Typography>
                   <TextField
                     variant="outlined"
@@ -334,7 +334,7 @@ class App extends React.Component {
                       ),
                     }}
                   ></TextField>
-
+                   </div>
                   <Droppable droppableId="droppable" isDropDisabled={true}>
                     {(provided, snapshot) => (
                       <List
